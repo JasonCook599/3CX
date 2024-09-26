@@ -10,13 +10,19 @@
 #>
 function Get-3CXSIPDevice {
   [CmdletBinding()]
-  param()
+  param(
+    $Expand = 'DN',
+    $Filter = "DN/Type eq 'Extension'",
+    $Order = "DN/Number",
+    [int]$Limit
+  )
   $params = @{
     Endpoint    = '/xapi/v1/SipDevices'
     Paginate    = $true
-    PageExpand  = 'DN'
-    PageFilter  = "DN/Type eq 'Extension'"
-    PageOrderBy = "DN/Number"
+    PageExpand  = $Expand
+    PageFilter  = $Filter
+    PageOrderBy = $Order
+    Limit       = $Limit
   }
-  return Get-3CXResult @params
+  return Get-3CXResult @params -Verbose
 }

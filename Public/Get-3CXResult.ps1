@@ -100,7 +100,7 @@ function Get-3CXResult {
       while ($targetCount -lt 0 -or $values.Count -lt $targetCount) {
         Write-Verbose "Retrieving SIP Devices from Top $PageSize and Skip $($values.Count)"
         $newBody = @{
-          '$top'   = $PageSize
+          '$top'   = if ($Limit -gt 0) { (@(($Limit - $values.count), $PageSize) | Measure-Object -Minimum).Minimum }      else { $PageSize }
           '$skip'  = $values.Count
           '$count' = 'true'
         }
@@ -122,7 +122,8 @@ function Get-3CXResult {
         }
 
         $result = Get-3CXResult -Endpoint $Endpoint -Body $newBody
-        $targetCount = $result.'@odata.count'
+        if ($Limit) { $targetCount = $Limit }
+        else { $targetCount = $result.'@odata.count' }
         $result.value | ForEach-Object { $values.Add($_) }
       }
 

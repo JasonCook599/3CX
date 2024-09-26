@@ -10,14 +10,21 @@
 #>
 function Get-3CXUser {
   [CmdletBinding()]
-  param()
+  param(
+    $Filter = "not startsWith(Number,'HD')",
+    $Order = "Number",
+    $Select = "IsRegistered,CurrentProfileName,DisplayName,Id,EmailAddress,Number,Tags,Require2FA",
+    $Expand = 'Groups($select=GroupId,Name,Rights;$filter=not startsWith(Name,''___FAVORITES___'');$expand=Rights($select=RoleName)),Phones($select=MacAddress,Name,Settings($select=IsSBC,ProvisionType))',
+    [int]$Limit
+  )
   $params = @{
     Endpoint    = '/xapi/v1/Users'
     Paginate    = $true
-    PageFilter  = "not startsWith(Number,'HD')"
-    PageOrderBy = "Number"
-    PageSelect  = "IsRegistered,CurrentProfileName,DisplayName,Id,EmailAddress,Number,Tags,Require2FA"
-    PageExpand  = 'Groups($select=GroupId,Name,Rights;$filter=not startsWith(Name,''___FAVORITES___'');$expand=Rights($select=RoleName)),Phones($select=MacAddress,Name,Settings($select=IsSBC,ProvisionType))'
+    PageFilter  = $Filter
+    PageOrderBy = $Order
+    PageSelect  = $Select
+    PageExpand  = $Expand
+    Limit       = $Limit
   }
   return Get-3CXResult @params
 }

@@ -10,11 +10,15 @@
 #>
 function Get-3CXActiveCalls {
   [CmdletBinding()]
-  param()
+  param(
+    $Order = 'LastChangeStatus desc',
+    [int]$Limit
+  )
   $params = @{
     Endpoint    = '/xapi/v1/ActiveCalls'
     Paginate    = $true
-    PageOrderBy = 'LastChangeStatus desc'
+    PageOrderBy = $Order
+    Limit       = $Limit
   }
   return Get-3CXResult @params
 }
