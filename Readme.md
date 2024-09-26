@@ -9,7 +9,6 @@
 
 This Powershell module contains a set of functions for connecting and talking to a 3CX V20+ System via the REST-API.
 
-
 ## Installation
 
 To install the module, you can use the following command:
@@ -45,7 +44,6 @@ Get-3CXResult -Endpoint "/xapi/v1/SystemStatus" | ft
 ```
 
 The authentication is handled by `Get-3CXResult`
-
 
 ## Contributing
 

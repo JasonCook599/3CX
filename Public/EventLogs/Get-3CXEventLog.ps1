@@ -9,13 +9,13 @@
         powershell object containing the 3CX response
 #>
 function Get-3CXEventLog {
-    [CmdletBinding()]
-    param()
-    $params = @{
-        Endpoint = '/xapi/v1/EventLogs'
-        Paginate = $true
-        PageFilter = "Type eq 'Info' or Type eq 'Warning' or Type eq 'Error'"
-        PageOrderBy = "TimeGenerated desc"
-    }
-    return Get-3CXResult @params
+  [CmdletBinding()]
+  param()
+  $params = @{
+    Endpoint    = '/xapi/v1/EventLogs'
+    Paginate    = $true
+    PageFilter  = "Type eq 'Info' or Type eq 'Warning' or Type eq 'Error'"
+    PageOrderBy = "TimeGenerated desc"
+  }
+  return Get-3CXResult @params
 }

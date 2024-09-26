@@ -9,21 +9,21 @@
         powershell object containing the 3CX response
 #>
 function Get-3CXSBC {
-    [CmdletBinding(DefaultParameterSetName = "Default")]
-    param(
-        [Parameter(Mandatory=$True, ParameterSetName="Single")]
-        $Name,
-        
-        [Parameter(Mandatory=$False, ParameterSetName="Single")]
-        [Parameter(Mandatory=$False, ParameterSetName="Default")]
-        [string[]]$PageSelect = @()
-    )
+  [CmdletBinding(DefaultParameterSetName = "Default")]
+  param(
+    [Parameter(Mandatory = $True, ParameterSetName = "Single")]
+    $Name,
 
-    $params = @{
-        Endpoint = "/xapi/v1/sbcs"
-        ID = $Name
-        PageSelect = $PageSelect
-    }
-    
-    return Get-3CXResult @params
+    [Parameter(Mandatory = $False, ParameterSetName = "Single")]
+    [Parameter(Mandatory = $False, ParameterSetName = "Default")]
+    [string[]]$PageSelect = @()
+  )
+
+  $params = @{
+    Endpoint   = "/xapi/v1/sbcs"
+    ID         = $Name
+    PageSelect = $PageSelect
+  }
+
+  return Get-3CXResult @params
 }

@@ -9,12 +9,12 @@
         powershell object containing the 3CX response
 #>
 function Get-3CXActiveCalls {
-    [CmdletBinding()]
-    param()
-    $params = @{
-        Endpoint = '/xapi/v1/ActiveCalls'
-        Paginate = $true
-        PageOrderBy = 'LastChangeStatus desc'
-    }
-    return Get-3CXResult @params
+  [CmdletBinding()]
+  param()
+  $params = @{
+    Endpoint    = '/xapi/v1/ActiveCalls'
+    Paginate    = $true
+    PageOrderBy = 'LastChangeStatus desc'
+  }
+  return Get-3CXResult @params
 }

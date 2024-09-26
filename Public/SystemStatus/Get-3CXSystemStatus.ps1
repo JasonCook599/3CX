@@ -9,7 +9,7 @@
         powershell object containing the 3CX response
 #>
 function Get-3CXSystemStatus {
-    [CmdletBinding()]
-    param()
-    return Get-3CXResult -Endpoint "/xapi/v1/SystemStatus"
+  [CmdletBinding()]
+  param()
+  return Get-3CXResult -Endpoint "/xapi/v1/SystemStatus"
 }
