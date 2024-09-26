@@ -16,4 +16,4 @@ foreach ($Function in @($Functions)) {
   }
 }
 
-$script:3CXSession = $null
+# $script:3CXSession = $null

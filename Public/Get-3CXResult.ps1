@@ -21,6 +21,9 @@ function Get-3CXResult {
     [switch]$Paginate,
 
     [Parameter(Mandatory = $False, ParameterSetName = "Paginate")]
+    [int]$Limit,
+
+    [Parameter(Mandatory = $False, ParameterSetName = "Paginate")]
     [int]$PageSize = 50,
 
     [Parameter(Mandatory = $False, ParameterSetName = "Paginate")]
@@ -43,6 +46,9 @@ function Get-3CXResult {
 
   if ($null -eq $script:3CXSession) {
     throw "3CX session not established - Please run Connect-3CX"
+  }
+  elseif ((Get-Date) -ge $script:3CXSession.ExpiresAt) {
+    throw "3CX session has expired. - Please run Connect-3CX"
   }
 
   switch ($PSCmdlet.ParameterSetName) {
@@ -73,7 +79,8 @@ function Get-3CXResult {
       }
       Write-Debug "Parameter $($params | ConvertTo-Json)"
 
-      $result = Invoke-WebRequest @params
+      try { $result = Invoke-WebRequest @params }
+      catch { throw $_ }
       Write-Debug "Raw Content Result $($result.Content)"
 
       $obj = $result.Content | ConvertFrom-Json
