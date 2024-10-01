@@ -44,11 +44,11 @@ function Get-3CXResult {
   $PageSelect = $PageSelect | Where-Object { $null -ne $_ }
 
 
+  if ((Get-Date) -ge $script:3CXSession.ExpiresAt) {
+    Connect-3CX -Refresh
+  }
   if ($null -eq $script:3CXSession) {
     throw "3CX session not established - Please run Connect-3CX"
-  }
-  elseif ((Get-Date) -ge $script:3CXSession.ExpiresAt) {
-    throw "3CX session has expired. - Please run Connect-3CX"
   }
 
   switch ($PSCmdlet.ParameterSetName) {
