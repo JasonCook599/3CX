@@ -79,17 +79,29 @@ function Get-3CXResult {
       }
       Write-Debug "Parameter $($params | ConvertTo-Json)"
 
-      try { $result = Invoke-WebRequest @params }
+      try { $result = Invoke-WebRequest @params -ContentType "application/json" }
       catch { throw $_ }
-      Write-Debug "Raw Content Result $($result.Content)"
 
-      $obj = $result.Content | ConvertFrom-Json
-
-      $arrayFields = @('value', '@odata.context')
-      if ($null -eq (Compare-Object -ReferenceObject $arrayFields -DifferenceObject $obj.PSObject.Properties.Name) ) {
-        return $obj.value
+      if ($result.RawContentLength -le 0) {
+        return [PSCustomObject]@{
+          Id                = $ID
+          StatusCode        = $result.StatusCode
+          StatusDescription = $result.StatusDescription
+          Content           = $result.Content
+        }
       }
-      return $obj | Select-Object -ExcludeProperty '@odata.context'
+      else {
+
+        Write-Debug "Raw Content Result $($result.Content)"
+
+        $obj = $result.Content | ConvertFrom-Json
+
+        $arrayFields = @('value', '@odata.context')
+        if ($null -eq (Compare-Object -ReferenceObject $arrayFields -DifferenceObject $obj.PSObject.Properties.Name) ) {
+          return $obj.value
+        }
+        return $obj | Select-Object -ExcludeProperty '@odata.context'
+      }
     }
 
     "Paginate" {
