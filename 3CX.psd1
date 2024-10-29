@@ -89,7 +89,7 @@
     "Get-3CXUser"
     "Get-3CXVersion"
     "Remove-3CXUser"
-    "Update-3CXM365Users.ps1"
+    "Update-3CXM365Users"
   )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
