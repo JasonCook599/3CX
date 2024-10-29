@@ -70,17 +70,26 @@
 
   # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
   FunctionsToExport = @(
-    "Connect-3CX",
-    "Get-3CXActiveCalls",
-    "Get-3CXEventLog",
-    "Get-3CXResult",
-    "Get-3CXSIPDevice",
-    "Get-3CXSystemHealth",
-    "Get-3CXSystemStatus",
-    "Get-3CXUser",
-    "Get-3CXVersion",
-    "Get-3CXSBC",
+    "Add-3CXDepartmentMember"
+    "Connect-3CX"
+    "Get-3CXActiveCalls"
+    "Get-3CXDepartment"
+    "Get-3CXDepartmentMembers"
+    "Get-3CXDIDs"
+    "Get-3CXEventLog"
+    "Get-3CXM365Integration"
+    "Get-3CXPromptSets"
+    "Get-3CXResult"
+    "Get-3CXRoute"
+    "Get-3CXSBC"
+    "Get-3CXSIPDevice"
+    "Get-3CXSystemHealth"
+    "Get-3CXSystemStatus"
     "Get-3CXTrunk"
+    "Get-3CXUser"
+    "Get-3CXVersion"
+    "Remove-3CXUser"
+    "Update-3CXM365Users.ps1"
   )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
